@@ -133,14 +133,6 @@
     {
       "from": "step05",
       "to": "step06"
-    },
-    {
-      "from": "step06",
-      "to": "idEventoFinal"
-    },
-    {
-      "from": "step07",
-      "to": "sosaAlter-Temp"
     }
   ],
   "defaultConversationalChannel": "CHAT",
