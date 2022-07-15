@@ -135,8 +135,8 @@
       "to": "step06"
     },
     {
-      "from": "step06",
-      "to": "idEventoFinal"
+      "from": "step08",
+      "to": "SOSAFinal-STAR"
     }
   ],
   "defaultConversationalChannel": "CHAT",
