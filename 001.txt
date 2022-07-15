@@ -1,0 +1,144 @@
+{
+  "alias": "General Test Boeira",
+  "description": "",
+  "steps": [
+    {
+      "id": "idEventoInicial",
+      "type": "chatEvent",
+      "label": "Evento inicial",
+      "properties": {
+        "startEvent": "true"
+      },
+      "variables": {
+        "chatFrom": "ID_WEBCHAT_AQUI"
+      },
+      "conditions": [
+        {
+          "type": "channelSourceCondition",
+          "values": [
+            "ID_WEBCHAT_AQUI"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idEventoFinal",
+      "type": "endEvent",
+      "label": "label 3",
+      "properties": {
+        "endEvent": "true"
+      }
+    },
+    {
+      "id": "step0",
+      "type": "sendChatActivity",
+      "properties": {
+        "from": "#{session['chatFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Começou a conversa..."
+          }
+        }
+      ]
+    },
+    {
+      "id": "step02",
+      "type": "callComponent",
+      "properties": {
+        "componentId": "4d242136-a4e2-46b2-bf4f-77a7a265e622",
+        "timeUnit": "minute",
+        "expirationInMinutes": ""
+      },
+      "inputs": {
+        "question": "'Qual o seu e-mail?'",
+        "max_tries": "3",
+        "question_when_invalid_answer": "'Não entendi, poderia me informar seu e-mail? (Ex.: abc@seudominio.com)'",
+        "message_exhausted_attempts": "'Infelizmente não consegui entender seu e-mail.'"
+      },
+      "label": "Valida E-mail"
+    },
+    {
+      "id": "step03",
+      "type": "sendChatActivity",
+      "properties": {
+        "from": "#{session['chatFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Responda algo..."
+          }
+        }
+      ]
+    },
+    {
+      "id": "step04",
+      "type": "chatEvent",
+      "variables": {
+        "answer": "payload"
+      }
+    },
+    {
+      "id": "step05",
+      "type": "nop",
+      "properties": {
+        "timeUnit": "minute",
+        "expirationInMinutes": ""
+      },
+      "variables": {
+        "historico": "#stateFunction.get(session['sessionId'])"
+      }
+    },
+    {
+      "id": "step06",
+      "type": "sendChatActivity",
+      "properties": {
+        "from": "#{session['chatFrom']}"
+      },
+      "contents": [
+        {
+          "type": "text/plain",
+          "payload": {
+            "text": "Print do Histórico:\n#{historico}"
+          }
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "idEventoInicial",
+      "to": "step0"
+    },
+    {
+      "from": "step0",
+      "to": "step02"
+    },
+    {
+      "from": "step02",
+      "to": "step03"
+    },
+    {
+      "from": "step03",
+      "to": "step04"
+    },
+    {
+      "from": "step04",
+      "to": "step05"
+    },
+    {
+      "from": "step05",
+      "to": "step06"
+    },
+    {
+      "from": "step06",
+      "to": "idEventoFinal"
+    }
+  ],
+  "defaultConversationalChannel": "CHAT",
+  "historic": true
+}
