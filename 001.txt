@@ -133,10 +133,6 @@
     {
       "from": "step05",
       "to": "step06"
-    },
-    {
-      "from": "step08",
-      "to": "SOSAFinal-STAR"
     }
   ],
   "defaultConversationalChannel": "CHAT",
